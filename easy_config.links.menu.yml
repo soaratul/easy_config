@@ -1,0 +1,6 @@
+# Easy config type menu items definition
+entity.easy_config_type.collection:
+  title: 'Easy config'
+  route_name: entity.easy_config_type.collection
+  description: 'Manage configurations'
+  parent: system.admin_structure

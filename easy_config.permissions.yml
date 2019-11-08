@@ -1,0 +1,15 @@
+access easy config overview:
+  title: 'Access the Easy Config overview page'
+  description: 'Get an overview of all easy config types.'
+create easy config type:
+  title: 'Create new Easy Config type'
+  restrict access: true
+edit easy config type:
+  title: 'Edit Easy Config type'
+  restrict access: true
+delete easy config type:
+  title: 'Delete Easy Config type'
+  restrict access: true
+
+permission_callbacks:
+  - \Drupal\easy_config\EasyConfigPermissions::getPermissions

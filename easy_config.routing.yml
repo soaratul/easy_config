@@ -1,0 +1,64 @@
+# Easy config types
+#entity.easy_config_type.collection:
+#  path: '/admin/structure/easy-config/types'
+#  defaults:
+#    _controller: '\Drupal\easy_config\Controller\EasyConfigTypeListBuilder::render'
+#    _title: 'Easy config types'
+#  requirements:
+#    _permission: 'access easy config overview'
+#
+#entity.easy_config_type.add_form:
+#  path: '/admin/structure/easy-config/types/add'
+#  defaults:
+#    _entity_form: easy_config_type.default
+#    _title: 'Add type'
+#  requirements:
+#    _permission: 'administer easy config types'
+#
+#entity.easy_config_type.edit_form:
+#  path: '/admin/structure/easy-config/types/{easy_config_type}/edit'
+#  defaults:
+#    _entity_form: easy_config_type.default
+#    _title: 'Edit type'
+#  requirements:
+#    _permission: 'administer easy config types'
+#
+#entity.easy_config_type.delete_form:
+#  path: '/admin/structure/easy-config/types/{easy_config_type}/delete'
+#  defaults:
+#    _entity_form: easy_config_type.delete
+#    _title: 'Delete type'
+#  requirements:
+#    _permission: 'administer easy config types'
+
+# Easy config
+#entity.easy_config.collection:
+#  path: '/admin/structure/easy-config/configs/{type}/list'
+#  defaults:
+#    _controller: '\Drupal\easy_config\Controller\EasyConfigListBuilder::render'
+#    _title_callback: '\Drupal\easy_config\Controller\EasyConfigListBuilder::getTitle'
+#  requirements:
+#    _custom_access: '\Drupal\easy_config\Controller\EasyConfigListBuilder::access'
+
+#entity.easy_config.add_form:
+#  path: '/admin/structure/easy-config/configs/add'
+#  defaults:
+#    _entity_form: easy_config.default
+#    _title: 'Add type'
+#  requirements:
+#    _permission: 'access easy config overview'
+#
+#entity.easy_config.edit_form:
+#  path: '/admin/structure/easy-config/configs/{easy_config}/edit'
+#  defaults:
+#    _entity_form: easy_config.default
+#    _title: 'Edit easy config'
+#  requirements:
+#    _permission: 'access easy config overview'
+#
+#entity.easy_config.delete_form:
+#  path: '/admin/structure/easy-config/configs/{easy_config}/delete'
+#  defaults:
+#    _entity_form: easy_config.delete
+#  requirements:
+#    _permission: 'access easy config overview'

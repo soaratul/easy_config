@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Contains easy_config.module.
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function easy_config_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the easy_config module.
+    case 'help.page.easy_config':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Easy configurations.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function easy_config_form_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['easy_config_settings'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Use Easy Config Background'),
+    '#description' => t('Use Easy Config Background'),
+    '#weight' => 0,
+    '#ajax' => [
+      'callback' => 'easy_config_type_form_ajax',
+      'wrapper' => 'easy-config-type-wrapper',
+      'effect' => 'fade',
+    ],
+  ];
+  $easy_config_type2 = $form_state->getValue('easy_config_settings');
+  $form['easy_config_type_wrapper'] = [
+    '#type' => 'container',
+    '#id' => 'easy-config-type-wrapper',
+    '#weight' => 0,
+  ];
+
+  if (empty($form_state->getValue('easy_config_settings'))) {
+    $form_state->setValue('easy_config_type_wrapper', '');
+  }
+  else {
+    $entity_type_manager = \Drupal::service('entity_type.manager');
+    $config_types = $entity_type_manager->getStorage('easy_config_type')->loadMultiple();
+
+    $options = [];
+
+    foreach ($config_types as $config_type) {
+      $options[$config_type->id()] = $config_type->label();
+    }
+    $form['easy_config_type_wrapper']['easy_config_type'] = [
+      '#type' => 'select',
+      '#title' => t('Easy config type'),
+      '#description' => t('Filter Easy config type.'),
+      '#required' => TRUE,
+      '#options' => $options,
+      '#default_value' => $form_state->getValue('easy_config_type'),
+      '#ajax' => [
+        'callback' => 'easy_config_form_ajax',
+        'wrapper' => 'easy-config-wrapper',
+        'effect' => 'fade',
+      ],
+    ];
+  }
+
+  $form['easy_config_wrapper'] = [
+    '#type' => 'container',
+    '#id' => 'easy-config-wrapper',
+    '#weight' => 0,
+  ];
+
+  if (isset($form_state->getValue('easy_config_type_wrapper')['easy_config_type']) && !empty($easy_config_type)) {
+    $entity_type_manager = \Drupal::service('entity_type.manager');
+    $configs = $entity_type_manager->getStorage('easy_config')->loadByProperties(['config_type' => $easy_config_type]);
+    $config_options = [];
+    foreach ($configs as $config) {
+      $config_options[$config->id()] = $config->label();
+    }
+    $form['easy_config_wrapper']['easy_config'] = [
+      '#type' => 'select',
+      '#title' => t('Easy config' . $easy_config_type),
+      '#description' => t('Select Easy config.'),
+      '#required' => TRUE,
+      '#options' => $config_options,
+    ];
+  }
+}
+
+function easy_config_type_form_ajax($form, FormStateInterface $form_state) {
+  return $form['easy_config_type_wrapper'];
+}
+
+function easy_config_form_ajax($form, FormStateInterface $form_state) {
+  return $form['easy_config_wrapper'];
+}

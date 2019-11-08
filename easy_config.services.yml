@@ -1,0 +1,20 @@
+services:
+  easy_config.twig.extension:
+    class: Drupal\easy_config\TwigExtension\EasyConfigTwigExtension
+    arguments: ['@renderer', '@config.manager', '@entity_type.manager', '@entity.manager']
+    tags:
+      - { name: twig.extension }
+  logger.channel.easy_config:
+    parent: logger.channel_base
+    arguments: ['easy_config']
+  easy_config.service:
+    class: Drupal\easy_config\EasyConfigService
+    arguments: ['@entity.manager', '@entity_type.manager', '@config.factory']
+  easy_config.route_subscriber:
+    class: Drupal\easy_config\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  easy_config.param_converter:
+    class: Drupal\easy_config\Routing\ParamConverter
+    tags:
+      - { name: paramconverter }

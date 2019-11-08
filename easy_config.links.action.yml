@@ -1,0 +1,10 @@
+entity.easy_config_type.add_form:
+  route_name: entity.easy_config_type.add_form
+  title: 'Add easy config type'
+  appears_on:
+    - entity.easy_config_type.collection
+entity.easy_config.add_form:
+  route_name: entity.easy_config.add_form
+  title: 'Add easy config'
+  appears_on:
+    - entity.easy_config.collection

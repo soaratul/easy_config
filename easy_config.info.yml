@@ -1,0 +1,5 @@
+name: 'Easy config'
+type: module
+description: 'Easy configurations.'
+core: 8.x
+package: 'Custom'

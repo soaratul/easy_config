@@ -1,0 +1,21 @@
+easy_config.config.*:
+  type: config_entity
+  label: 'Easy config config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    title:
+      type: label
+      label: 'Label'
+    config_type:
+      type: string
+      label: 'Config Type'
+    type:
+      type: string
+      label: 'Type'
+    value:
+      type: text
+      label: 'Value'
+    uuid:
+      type: string
